@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(urlencoded({extended:true}));
 
 //Route
-app.use('/database',userRoutes);
+app.use('/db',userRoutes);
 
 //DB
 connectDB();
