@@ -1,6 +1,7 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 import { connectDB } from './Config/dbConnection.js';
 import userRoutes from './Routes/userRoutes.js';
+import authRoutes from './Routes/authRoutes.js'
 
 const app = express();
 const port = 3000;
@@ -8,10 +9,13 @@ const port = 3000;
 
 //Middleware
 app.use(express.json());
-app.use(urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));
 
 //Route
 app.use('/db',userRoutes);
+
+// Mount your auth routes at /auth
+app.use('/auth', authRoutes);
 
 //DB
 connectDB();

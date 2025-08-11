@@ -7,7 +7,7 @@ export const validationSchema = z.object({
     email: z.string().email({
         message: "Provide mail address"
     }),
-    age: z.number().min(18,{
+    age: z.coerce.number().min(18,{
         message: "Below Age Category"
     }),
     contact: z.string().length(10,{

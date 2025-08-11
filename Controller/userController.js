@@ -59,3 +59,33 @@ export const addNewUsers = async(req,res) => {
         }
     }
 }
+
+//Search by id
+export const findyUserBYId = async(req,res) => {
+    try{
+        const {id} = req.params;
+        const userId = await userModel.findById(id);
+        if(!userId) {
+            res.status(500).json({
+                status: false,
+                message: "Id unavailable"
+            })
+        } else {
+            res.status(200).json({
+                user: userId
+            })
+        }
+    }catch(e) {
+        if(e instanceof ZodError) {
+            res.status(500).json({
+                status: false,
+                error: e.issues
+            })
+        } else {
+            res.status(500).json({
+                status: false,
+                message: "Internal Server Error"
+            })
+        }
+    }
+}
